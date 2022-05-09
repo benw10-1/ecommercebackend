@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     let ret = Category.create(req.body)
     res.status(200).json(ret)
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     let ret = await Category.update(req.body, {where: {id: req.params.id}})
     res.status(200).json(ret)
@@ -61,14 +61,14 @@ router.put('/:id', (req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     let ret = await Category.destroy({where: {id: req.params.id}})
     res.status(200).json(ret)
   }
   catch (err) {
     err = String(err)
-    res.status(400).json({
+    res.status(404).json({
       status: "error",
       result: err
     })

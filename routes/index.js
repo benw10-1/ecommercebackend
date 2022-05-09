@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
 
+// /categories
+// /products
+// /tags
 router.use('/api', apiRoutes);
 
 router.use((req, res) => {
