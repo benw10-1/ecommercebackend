@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Category, Product } = require('../../models');
+const { Product, Category } = require('../../models');
 
 // The `/api/categories` endpoint
 router.get('/', async (req, res) => {
   try {
-    let cats = await Category.findAll({include: [Product]})
-    res.json(cats)
+    let ret = await Category.findAll({include: [Product]})
+    res.json(ret)
   }
   catch (err) {
     err = String(err)
@@ -18,11 +18,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    let cat = await Category.findOne({
+    let ret = await Category.findOne({
       where: {id: req.params.id},
       include: [Product]
     })
-    res.json(cat)
+    res.json(ret)
   }
   catch (err) {
     err = String(err)
@@ -35,8 +35,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    let cat = Category.create(req.body)
-    res.status(200).json(cat)
+    let ret = Category.create(req.body)
+    res.status(200).json(ret)
   }
   catch (err) {
     err = String(err)
@@ -49,8 +49,8 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   try {
-    let cat = await Category.update(req.body, {where: {id: req.params.id}})
-    res.status(200).json(cat)
+    let ret = await Category.update(req.body, {where: {id: req.params.id}})
+    res.status(200).json(ret)
   }
   catch (err) {
     err = String(err)
@@ -63,8 +63,8 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   try {
-    let cat = await Category.destroy({where: {id: req.params.id}})
-    res.status(200).json(cat)
+    let ret = await Category.destroy({where: {id: req.params.id}})
+    res.status(200).json(ret)
   }
   catch (err) {
     err = String(err)
